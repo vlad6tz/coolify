@@ -4,8 +4,6 @@
     </x-slot>
 
     <livewire:project.database.heading :database="$database" />
-
-
     <section class="application-settings-workspace mt-4 w-full max-w-[1180px] lg:mt-0">
         <div class="grid min-w-0 gap-8 xl:grid-cols-[210px_minmax(0,1fr)] xl:gap-10">
             <x-database.configuration-sidebar :database="$database" :current-route="$currentRoute" />
@@ -28,6 +26,8 @@
                         <livewire:project.database.dragonfly.general :database="$database" />
                     @elseif ($database->type() === 'standalone-clickhouse')
                         <livewire:project.database.clickhouse.general :database="$database" />
+                    @elseif ($database->type() === 'standalone-cassandra')
+                        <livewire:project.database.cassandra.general :database="$database" />
                     @endif
                 @elseif ($currentRoute === 'project.database.environment-variables')
                     <livewire:project.shared.environment-variable.all :resource="$database" />

@@ -1086,6 +1086,7 @@ $schema://$host {
         $keydbs = StandaloneKeydb::where($destinationCondition)->get();
         $dragonflies = StandaloneDragonfly::where($destinationCondition)->get();
         $clickhouses = StandaloneClickhouse::where($destinationCondition)->get();
+        $cassandras = StandaloneCassandra::where($destinationCondition)->get();
 
         return $postgresqls
             ->concat($redis)
@@ -1095,6 +1096,7 @@ $schema://$host {
             ->concat($keydbs)
             ->concat($dragonflies)
             ->concat($clickhouses)
+            ->concat($cassandras)
             ->filter(fn ($item) => data_get($item, 'name') !== 'coolify-db');
     }
 
