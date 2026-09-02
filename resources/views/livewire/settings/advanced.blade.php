@@ -127,16 +127,23 @@
                             ['value' => false, 'label' => 'Enabled'],
                             ['value' => true, 'label' => 'Disabled'],
                         ]" />
-                    <x-forms.listbox id="is_sponsorship_popup_enabled" label="Sponsorship reminders"
-                        helper="Show the monthly project sponsorship reminder." onChange="instantSave" :options="[
-                            ['value' => true, 'label' => 'Enabled'],
-                            ['value' => false, 'label' => 'Disabled'],
-                        ]" />
+                    <div class="flex flex-col gap-2">
+                        <x-forms.listbox id="is_sponsorship_popup_enabled" label="Sponsorship reminders"
+                            helper="Show the monthly project sponsorship reminder." onChange="instantSave" :options="[
+                                ['value' => true, 'label' => 'Enabled'],
+                                ['value' => false, 'label' => 'Disabled'],
+                            ]" />
+                        @if (isDev())
+                            <x-forms.button type="button" @click="$dispatch('show-sponsorship-reminder')">
+                                Show sponsorship reminder
+                            </x-forms.button>
+                        @endif
+                    </div>
                 </div>
             </x-application.settings-section>
 
-            <x-application.settings-section id="avatar-storage-section" title="Profile picture storage"
-                helper="Choose where compressed user profile pictures are stored. Use S3 for multi-instance or cloud deployments so every application replica can access the same files.">
+            <x-application.settings-section id="avatar-storage-section" title="Image storage"
+                helper="Choose where compressed profile pictures and project icons are stored. Use S3 for multi-instance or cloud deployments so every application replica can access the same files.">
                 <div class="max-w-md">
                     <x-forms.listbox id="avatar_storage" label="Storage destination" onChange="instantSave"
                         :options="$avatar_storage_options" />
